@@ -7,9 +7,13 @@
 // ============== MAIN PROCESSES ==============
 
 	// Add the following methods to the router object
-	
+
 	router.get("/", function(allReq, allResp) {
 		displayBurgers(allResp);
+	});
+
+	router.post("/", function(newReq, newResp) {
+		addBurger(newReq, newResp);
 	});
 
 	module.exports = router;
@@ -21,5 +25,12 @@
 		
 		burger.selectAll(function(results) {
 			response.render("index", {burgers: results});
+		});
+	}
+
+	function addBurger(request, response) {
+
+		burger.insertOne(request.body.burgerName, function() {
+			response.redirect("/");
 		});
 	}

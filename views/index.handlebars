@@ -1,5 +1,12 @@
 <h1>Burgers!</h1>
 
+<h2>Add a Burger:</h2>
+<form method="POST" action="/">
+	<label>Name of Burger:</label>
+	<input type="text" name="burgerName">
+	<button type="submit">Add</button>
+</form>
+
 <h2>Delicious Burgers to Eat!</h2>
 <ul>
 	{{#each burgers}}
