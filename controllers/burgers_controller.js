@@ -16,21 +16,40 @@
 		addBurger(newReq, newResp);
 	});
 
+	router.put("/:id", function(updtReq, updtResp) {
+		devourBurger(updtResp, updtReq.params.id);
+	});
 	module.exports = router;
 
 // ============== FUNCTIONS ==============
 
-	// Display all of the burgers in the table
 	function displayBurgers(response) {
 		
+		// Grab all the burgers saved in the database and then...
 		burger.selectAll(function(results) {
+
+			// render the burgers to the page
 			response.render("index", {burgers: results});
 		});
 	}
 
 	function addBurger(request, response) {
 
+		// Insert the new burger to the table and then...
 		burger.insertOne(request.body.burgerName, function() {
+
+			// Redirect the page to re-display the list of burgers
+			response.redirect("/");
+		});
+	}
+
+	function devourBurger(response, id) {
+
+		// When a burger is devoured, change the devoured value of the burger
+		// to true in the database and then...
+		burger.updateOne(true, parseInt(id), function() {
+
+			// Redirect the page to re-display the list of burgers
 			response.redirect("/");
 		});
 	}
